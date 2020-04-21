@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-contact',
@@ -6,8 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  users : any= [];
+  constructor(public htpcl: HttpClient) {
+    
+   }
+   sendGetRequest(){
+    this.htpcl.get('https://api.github.com/users').subscribe((res)=>{
+        console.log(res);
 
-  constructor() { }
+        this.users = res;
+       
+    });
+}
+
 
   ngOnInit(): void {
   }
